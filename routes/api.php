@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::middleware('auth:sanctum')->group( function(){
+    Route::get('/user',[ApiAuthController::class, 'authUser']);
+    Route::get('/logout',[ApiAuthController::class, 'logout']);
 });
+
+Route::post('/login',[ApiAuthController::class,'login'])->name('ApiLogin');
+Route::post('/register',[ApiAuthController::class,'register'])->name('ApiRegister');

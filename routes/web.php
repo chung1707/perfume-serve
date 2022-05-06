@@ -14,12 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $array = [
-        [
-            'slot1' => 2,
-            'slot2'=> 3
-        ]
-    ];
-    echo $array[0]['slot1'];
-    // return view('welcome');
+
+    return view('welcome');
 });
