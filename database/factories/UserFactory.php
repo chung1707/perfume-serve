@@ -25,9 +25,8 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'address' => $this->faker->address(),
             'phone' => $this->faker->numerify('###-###-####'),
-            'province_id' => 1,
-            'district_id' => 15,
-            'ward_id' => 230,
+            'avatar' => 'avatar.png',
+
         ];
     }
 

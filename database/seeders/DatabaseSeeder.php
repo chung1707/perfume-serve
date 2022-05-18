@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             CategoriesSeeder::class,
             ProductsSeeder::class,
             PicturesSeeder::class,
+            OrdersSeeder::class,
+            PostsSeeder::class,
         ]);
     }
 }

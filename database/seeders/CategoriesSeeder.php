@@ -21,6 +21,7 @@ class CategoriesSeeder extends Seeder
             Category::factory()->count(1)
             ->state([
                 'name' => $productCategories[$i],
+                'for_product' => true
             ])
             ->create();
         }
@@ -28,7 +29,7 @@ class CategoriesSeeder extends Seeder
             Category::factory()->count(1)
             ->state([
                 'name' => $postCategories[$i],
-                'for_product' => true
+                'for_product' => false
             ])
             ->create();
         }

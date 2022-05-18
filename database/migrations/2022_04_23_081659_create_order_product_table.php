@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('product_id');
             $table->integer('quantity')->default(1);
             $table->float('discount')->default(0);
-            $table->decimal('price');
+            $table->decimal('price',13);
             $table->timestamps();
         });
     }

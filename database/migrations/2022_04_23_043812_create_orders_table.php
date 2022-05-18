@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('transaction_id');
             $table->string('payment_methods');
             $table->text('note')->nullable();
-            $table->decimal('totalPrice')->default(0);
+            $table->decimal('totalPrice',15)->default(0);
             $table->boolean('pending')->default(true);
             $table->boolean('processing')->default(false);
             $table->boolean('delivered')->default(false);
@@ -27,10 +27,8 @@ return new class extends Migration
             $table->boolean('refunded')->default(false);
             $table->integer('discount_id')->nullable();
             $table->string('deliveryAddress');
+            $table->string('email');
             $table->string('phone_number');
-            $table->integer('province_id');
-            $table->integer('district_id');
-            $table->integer('ward_id');
             $table->timestamps();
             $table->softDeletes();
         });

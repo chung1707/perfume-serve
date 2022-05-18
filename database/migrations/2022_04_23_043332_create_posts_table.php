@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('approved')->default(false);
             $table->boolean('in_home')->default(false);
             $table->foreignId('category_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

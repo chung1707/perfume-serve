@@ -19,25 +19,33 @@ class UsersSeeder extends Seeder
         User::create([
             'name' => 'user',
             'email' => 'user@perfume.com',
-            'phone' => '98765432100',
+            'phone' => '987654321002',
             'address' => '2362 Aoma Rapid Jakubowskiton, PA 29565-0803',
-            'role_id' => 1,
+            'role_id' => 2,
             'password' => Hash::make('user1234'),
-            'province_id' => 1,
-            'district_id' => 15,
-            'ward_id' => 230,
+            'avatar' => 'avatar.png',
         ]);
 
         User::create([
+            'name' => 'employee',
+            'email' => 'employee@perfume.com',
+            'phone' => '98765432110',
+            'address' => '2362 Lazada Rapid Jakubowskiton, PA 29565-0803',
+            'role_id' => 3,
+            'password' => Hash::make('employee123'),
+            'avatar' => 'avatar.png',
+            'position' => 'Nhân viên bán hàng',
+            'wage' => '7000000',
+        ]);
+        User::create([
             'name' => 'admin',
             'email' => 'admin@perfume.com',
-            'phone' => '9876543211',
+            'phone' => '98765432111',
             'address' => '2362 Lazada Rapid Jakubowskiton, PA 29565-0803',
-            'role_id' => 2,
+            'role_id' => 1,
             'password' => Hash::make('admin123'),
-            'province_id' => 1,
-            'district_id' => 15,
-            'ward_id' => 230,
+            'avatar' => 'avatar.png',
+            'position' => 'Quản lý cửa hàng',
         ]);
         User::factory()->count(30)->create();
     }

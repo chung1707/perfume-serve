@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidEmailRule;
+use App\Rules\ValidPhoneRule;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
-
-class ApiRegisterRequest extends FormRequest
+class ChangeInforRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +27,10 @@ class ApiRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','string','max:255'],
-            'email' => ['required','email ','max:255', 'unique:users'],
-            'password' => ['required','max:255', 'min:6', 'confirmed'],
+            'name' => 'required|max:255|string',
+            'email' => ['required','email','max:255', new ValidEmailRule()],
+            'address' => 'required|max:255',
+            'phone' => ['required', 'max:15', 'min:9', 'regex:/[0-9]/',new ValidPhoneRule()],
         ];
     }
     public function messages()
@@ -41,10 +43,10 @@ class ApiRegisterRequest extends FormRequest
             'name.required' => 'Bạn chưa nhập tên!',
             'name.max' => 'Tên có độ dài tối đa 255 kí tự!',
             'name.string' => 'Tên yêu cầu là một chuối!',
-            'password.max' => 'Mật khẩu phải dưới 255 kí tự!',
-            'password.required' => 'Bạn chưa nhập mật khẩu!',
-            'password.min' => 'mật khẩu phải trên 6 kí tự!',
-            'password.confirmed' => 'Mật khẩu không trùng khớp!',
+            'phone.max' => 'Số điện thoại phải dưới 15 kí tự!',
+            'phone.required' => 'Bạn chưa nhập Số điện thoại!',
+            'phone.min' => 'Số điện thoại phải trên 9 kí tự!',
+            'phone.unique' => 'Số điện tho này đã được sử dụng!',
         ];
     }
 }

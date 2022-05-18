@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('supplier_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('transaction_id');
-            $table->decimal('totalPrice')->default(0);
+            $table->decimal('totalPrice',15)->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

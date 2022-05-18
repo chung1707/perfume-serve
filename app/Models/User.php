@@ -2,16 +2,28 @@
 
 namespace App\Models;
 
+use App\Models\Cart;
+use App\Models\Role;
+use App\Models\Order;
+use DateTimeInterface;
+use App\Models\SaleBill;
+use App\Models\AdminCart;
+
+use App\Models\ImportBill;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes; // add soft delete
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d');
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -25,12 +37,11 @@ class User extends Authenticatable
         'facebook_id',
         'google_id',
         'role_id',
-        'province_id',
-        "district_id",
-        "ward_id",
         'address',
         "phone",
         "avatar",
+        "position",
+        "wage",
         "blocked",
     ];
 
@@ -61,21 +72,12 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo(Role::class);
     }
-    public function province(){
-        return $this->belongsTo(Province::class);
+    public function importBills(){
+        return $this->hasMany(ImportBill::class);
     }
-    public function district(){
-        return $this->belongsTo(District::class);
-    }
-    public function ward(){
-        return $this->belongsTo(Ward::class);
-    }
-    public function import_bills(){
-        return $this->hasMany(ImportBills::class);
-    }
-    public function adminCart(){
-        return $this->hasOne(AdminCart::class);
-    }
+    // public function adminCart(){
+    //     return $this->hasOne(AdminCart::class);
+    // }
     public function saleBills(){
         return $this->hasMany(SaleBill::class);
     }

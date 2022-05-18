@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('productCode');
             $table->string('name');
-            $table->decimal('price',13,2)->default(0);
+            $table->decimal('price',13)->default(0);
             $table->integer('sold')->default(0);
             $table->integer('quantity')->default(0);
+            $table->integer('capacity')->default(100);
             $table->integer('discount')->default(0);
             $table->foreignId('category_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('supplier_id')->constrained()->onDelete('cascade')->onUpdate('cascade');

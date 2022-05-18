@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('import_bills_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->integer('product_id');
             $table->integer('quantity')->default(1);
-            $table->decimal('price');
+            $table->decimal('price',13);
             $table->timestamps();
         });
     }

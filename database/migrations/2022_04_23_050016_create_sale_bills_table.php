@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('sale_bills', function (Blueprint $table) {
             $table->id();
-            $table->decimal('totalPrice')->default(0);
+            $table->decimal('totalPrice',15)->default(0);
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('transaction_id');
             $table->string('name');

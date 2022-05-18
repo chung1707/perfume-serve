@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,17 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'created_at' => now(),
+            'updated_at' => now(),
+            'payment_methods'=> 'payment_on_delivery',
+            'transaction_id'=> Str::random(5),
+            'phone_number' => $this->faker->numerify('###-###-####'),
+            'deliveryAddress' => $this->faker->address(),
+            'note' => $this->faker->paragraphs(2, true),
+            'totalPrice' =>$this->faker->numberBetween($min = 90000, $max = 500000),
+            'user_id' => 1,
+            'discount_id' => 1,
+            'email' => $this->faker->unique()->safeEmail(),
         ];
     }
 }
