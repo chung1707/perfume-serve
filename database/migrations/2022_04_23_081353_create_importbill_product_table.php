@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('importbill_product', function (Blueprint $table) {
+        Schema::create('import_bill_product', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('import_bills_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('import_bill_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->integer('product_id');
             $table->integer('quantity')->default(1);
             $table->decimal('price',13);
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('importbill_product');
+        Schema::dropIfExists('import_bill_product');
     }
 };

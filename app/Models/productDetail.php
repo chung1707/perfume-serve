@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes; // add soft delete
 class productDetail extends Model
 {
     use HasFactory ,SoftDeletes ;
+    protected $fillable = ['description','concentration','release','saveIncense','age','spring','summer',
+    'fall','winter','daytime','night','fragrant'
+];
     protected $casts = ['fragrant' => 'array'];
     protected function serializeDate(DateTimeInterface $date)
     {

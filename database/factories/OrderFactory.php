@@ -27,7 +27,6 @@ class OrderFactory extends Factory
             'note' => $this->faker->paragraphs(2, true),
             'totalPrice' =>$this->faker->numberBetween($min = 90000, $max = 500000),
             'user_id' => 1,
-            'discount_id' => 1,
             'email' => $this->faker->unique()->safeEmail(),
         ];
     }

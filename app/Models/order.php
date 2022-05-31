@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\discount;
 use DateTimeInterface;
 use App\Models\Product;
 use Illuminate\Support\Carbon;
@@ -34,10 +35,12 @@ class order extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function discount()
+    {
+        return $this->belongsTo(discount::class);
+    }
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot('quantity', 'price', 'discount');
     }
-
-
 }

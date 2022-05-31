@@ -22,6 +22,7 @@ class PostFactory extends Factory
             'category_id' => 4,
             'user_id' => 1,
             'thumbnail' => 'product'.rand(1, 60).'.jpg',
+            'approved' => true,
         ];
     }
 }

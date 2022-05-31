@@ -45,6 +45,7 @@ class ApiAuthController extends Controller
             return response()->json([
                 'token' => $token,
                 'user' => $user,
+                'role_id' => 2,
                 'type_token' => 'Bearer'
             ]);
         }catch(Exception $e){

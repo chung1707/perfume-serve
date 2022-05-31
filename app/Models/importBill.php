@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes; // add soft delete
 class importBill extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable =['user_id','supplier_id','transaction_id','totalPrice'];
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d');

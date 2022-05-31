@@ -17,7 +17,7 @@ class PersonalController extends Controller
 {
     public function orders(Request $request)
     {
-        $orders = Order::where('user_id', '=', $request[0])->with('products',)->latest()->paginate(AppConst::DEFAULT_ORDER_PER_PAGE);
+        $orders = Order::where('user_id', '=', $request[0])->with('products','discount')->orderBy('id', 'desc')->paginate(AppConst::DEFAULT_ORDER_PER_PAGE);
         return response()->json([
             'orders' => $orders,
         ]);

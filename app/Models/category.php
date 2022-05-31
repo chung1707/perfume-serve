@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes; // add soft delete
 class category extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable = ['title','content', 'category_id', 'thumbnail'];
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d');
@@ -20,6 +21,6 @@ class category extends Model
         return $this->hasMany(Product::class);
     }
     public function posts(){
-        return $this->belongsToMany(Post::class);
+        return $this->hasMany(Post::class);
     }
 }

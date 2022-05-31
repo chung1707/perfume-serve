@@ -53,12 +53,17 @@ class ClientProductController extends Controller
         $products = $productsQuery->paginate(AppConst::DEFAULT_PRODUCTS_PER_PAGE);
         return response()->json($products);
     }
-    public function CategoriesInProductsPage()
+    public function CategoriesInProductsPage(Request $request)
     {
-        $categories = DB::table('categories')
-            ->where('for_product', true)
-            ->select('id', 'name')
-            ->get();
+
+        $categories = DB::table('categories');
+        if($request[0]){
+            $for_product = $request[0];
+            $categories = $categories->where('for_product', $for_product);
+        }else{
+            $categories = $categories->where('for_product', true);
+        }
+        $categories = $categories->select('id', 'name')->get();
         return response()->json($categories);
     }
     public function BrandsInProductsPage()

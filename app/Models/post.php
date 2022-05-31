@@ -18,9 +18,6 @@ class post extends Model
     {
         return $date->format('Y-m-d');
     }
-    public function pictures(){
-        return $this->hasOne(Picture::class);
-    }
     public function category(){
         return $this->belongsTo(Category::class);
     }

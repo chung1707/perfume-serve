@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Models\Cart;
 use App\Models\Role;
 use App\Models\Order;
+use App\Models\Policy;
 use DateTimeInterface;
-use App\Models\SaleBill;
-use App\Models\AdminCart;
 
+use App\Models\discount;
+use App\Models\AdminCart;
 use App\Models\ImportBill;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -75,10 +76,10 @@ class User extends Authenticatable
     public function importBills(){
         return $this->hasMany(ImportBill::class);
     }
-    // public function adminCart(){
-    //     return $this->hasOne(AdminCart::class);
-    // }
-    public function saleBills(){
-        return $this->hasMany(SaleBill::class);
+    public function policies(){
+        return $this->hasMany(Policy::class);
+    }
+    public function discounts(){
+        return $this->hasMany(discount::class);
     }
 }

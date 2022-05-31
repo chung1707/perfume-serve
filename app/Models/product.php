@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes; // add soft delete
 class product extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['name','productCode','quantity','price','supplier_id','product_detail_id','category_id'];
+    protected $fillable = ['name','productCode','discount','quantity','price','supplier_id','product_detail_id','category_id'];
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d');
