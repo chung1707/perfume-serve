@@ -125,7 +125,7 @@ Route::middleware(['auth:sanctum', 'checkBlock'])->group(function () {
     //post routes
     Route::get('/admin/post', [PostController::class, 'getPosts'])->middleware(['role:admin,employee']);
     Route::get('/admin/approved_posts', [PostController::class, 'getApprovedPosts'])->middleware(['role:admin']);
-    Route::post('/admin/post', [PostController::class, 'store'])->middleware(['role:admin,employee']);
+    Route::post('/admin/post', [PostController::class, 'store']);
     Route::put('/admin/post/{id}', [PostController::class, 'update'])->middleware(['role:admin,employee']);
     Route::get('/admin/post/{id}', [PostController::class, 'show'])->middleware(['role:admin,employee']);
     Route::post('/admin/approve_post/{id}', [PostController::class, 'approve'])->middleware(['role:admin']);
