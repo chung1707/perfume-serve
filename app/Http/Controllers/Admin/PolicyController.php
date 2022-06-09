@@ -51,4 +51,8 @@ class PolicyController extends Controller
             return response()->json(['status' => 401, 'error' => $e]);
         }
     }
+    public function clientPolicies(){
+        $policies = Policy::all();
+        return response()->json(['policies' => $policies]);
+    }
 }

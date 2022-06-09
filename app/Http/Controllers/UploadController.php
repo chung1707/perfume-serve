@@ -16,7 +16,7 @@ class UploadController extends Controller
             $random = Str::random(10);
                 $fileName = time().'.' . explode('/', explode(':', substr($file, 0, strpos($file, ';')))[1])[1];
                 $fileName = time().'_'.$random.$fileName;
-                $img = Image::make($file)->resize(500,500)->encode();;
+                $img = Image::make($file)->encode();;
                 Storage::put($fileName, $img);
                 Storage::move($fileName, 'public/images/' . $fileName);
             return response()->json(['fileName' => $fileName, 'success' => 201]);

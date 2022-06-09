@@ -28,9 +28,9 @@ class StatisticController extends Controller
             Carbon::now()->month - 5,
         ];
         for ($i = 0; $i < count($names); $i++) {
-            if ($names[$i] == 0) {
+            if ($names[$i] <= 0) {
                 $month = Order::whereYear('created_at', Carbon::now()->year - 1)
-                    ->whereMonth('created_at', 12)
+                    ->whereMonth('created_at', 12 + $names[$i])
                     ->where('delivered', true)
                     ->sum('totalPrice');
             } else {
@@ -42,8 +42,8 @@ class StatisticController extends Controller
             $months[] = $month;
         }
         $labels = array_map(function ($name) {
-            if ($name == 0) {
-                return 'Tháng 12(' . Carbon::now()->year - 1 . ')';
+            if ($name <= 0) {
+                return 'Tháng' . (12 + $name) . ' (' . Carbon::now()->year - 1 . ')';
             }
             return 'Tháng ' . $name;
         }, $names);
@@ -73,7 +73,7 @@ class StatisticController extends Controller
     public function getCardData()
     {
         $totalBill = importBill::count('id');
-        $turnover = Order::sum('totalPrice');
+        $turnover = Order::where('delivered', true)->sum('totalPrice');
         $importFee = ImportBill::sum('totalPrice');
         return response()->json([
             'totalBill' => $totalBill,
@@ -83,14 +83,15 @@ class StatisticController extends Controller
     }
     public function checkTurnOver(CheckTurnOverRequest $request)
     {
-        $turnover = Order::where('created_at', '>', $request->start)
-            ->where('created_at', '<', $request->end)->sum('totalPrice');
+        $turnover = Order::where('delivered', true)
+        ->whereBetween('created_at', [$request->start, $request->end])
+        ->sum('totalPrice');
         return response()->json($turnover);
     }
     public function checkFee(CheckFeeRequest $request)
     {
-        $fee = importBill::where('created_at', '>', $request->Start)
-            ->where('created_at', '<', $request->End)->sum('totalPrice');
+        $fee = importBill::whereBetween('created_at', [$request->Start, $request->End])
+            ->sum('totalPrice');
         return response()->json($fee);
     }
     public function getCardProductData()
@@ -109,10 +110,10 @@ class StatisticController extends Controller
     }
     public function getOutOfStock()
     {
-        $products = product::select('id', 'name', 'productCode','supplier_id')
-        ->where('quantity','=', 0)
-        ->with('supplier')
-        ->paginate(AppConst::DEFAULT_ORDER_PER_PAGE);
+        $products = product::select('id', 'name', 'productCode', 'supplier_id')
+            ->where('quantity', '=', 0)
+            ->with('supplier')
+            ->paginate(AppConst::DEFAULT_ORDER_PER_PAGE);
         return response()->json($products);
     }
     public function getSoldProducts()

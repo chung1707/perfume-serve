@@ -69,6 +69,7 @@ class ClientProductController extends Controller
     public function BrandsInProductsPage()
     {
         $brands = DB::table('Suppliers')
+            ->where('deleted_at', null)
             ->select('id', 'name')
             ->get();
         return response()->json($brands);

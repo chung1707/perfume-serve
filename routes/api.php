@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Api\PersonalController;
 use App\Http\Controllers\Admin\AccountController;
@@ -140,11 +141,21 @@ Route::middleware(['auth:sanctum', 'checkBlock'])->group(function () {
     Route::get('/admin/get_card_product_data', [StatisticController::class, 'getCardProductData'])->middleware(['role:admin']);
     Route::get('/admin/get_sold_products', [StatisticController::class, 'getSoldProducts'])->middleware(['role:admin']);
     Route::get('/admin/get_out_of_stock', [StatisticController::class, 'getOutOfStock'])->middleware(['role:admin']);
+
+    //banner Routes
+    Route::get('/admin/banners', [BannerController::class, 'getBanners'])->middleware(['role:admin']);
+    Route::delete('/admin/banner/{id}', [BannerController::class, 'delete'])->middleware(['role:admin']);
+    Route::get('/admin/banner/{id}', [BannerController::class, 'show'])->middleware(['role:admin']);
+    Route::put('/admin/banner/{id}', [BannerController::class, 'update'])->middleware(['role:admin']);
+    Route::post('/admin/banner', [BannerController::class, 'store'])->middleware(['role:admin']);
 });
 
 Route::post('/uploads', [UploadController::class, 'uploads']);
 Route::post('/login', [ApiAuthController::class, 'login'])->name('ApiLogin');
 Route::post('/register', [ApiAuthController::class, 'register'])->name('ApiRegister');
+
+Route::get('/polices', [PolicyController::class, 'clientPolicies']);
+Route::get('/get_banners', [BannerController::class, 'clientBanners']);
 
 // Home routes
 Route::get('/latestProducts', [HomeController::class, 'latestProducts']);

@@ -25,7 +25,7 @@ class OrderFactory extends Factory
             'phone_number' => $this->faker->numerify('###-###-####'),
             'deliveryAddress' => $this->faker->address(),
             'note' => $this->faker->paragraphs(2, true),
-            'totalPrice' =>$this->faker->numberBetween($min = 90000, $max = 500000),
+            'totalPrice' =>$this->faker->numberBetween($min = 1000000, $max = 5000000),
             'user_id' => 1,
             'email' => $this->faker->unique()->safeEmail(),
         ];
